@@ -11,29 +11,26 @@ html, body
 
 .cellempty, .cell {
     background-color:white;
-    border: 2px solid #1E53D6;
 }
 
 .cellred {
-    background-color:red;
     padding: 0px;
     width: 85px;
     height: 82px;
     border-radius: 80px;
     margin-bottom: 5px;
-    border: 2px solid red;
+    background-image: url("pics/redchip.png");
+    background-size: 85px;
 }
 
 .cellyellow {
-    background-color: yellow;
     padding: 0px;
     width: 85px;
     height: 82px;
     border-radius: 80px;
     margin-bottom: 5px;
-    border: 2px solid yellow;
-    background-image: url("img/brickwall.jpg");
-    background-size: 80px;
+    background-image: url("pics/yellowchip.png");
+    background-size: 85px;
 }
 
 #connectBoard {
@@ -49,9 +46,10 @@ h1 {
     font-family: Nunito, sans-serif;
     font-style: bold;
     left: 32%;
-    padding: 5px;
+    padding: 10px;
     top: 10px;
     justify-content: center;
+    margin: 0px;
 }
 
 .cell {
@@ -66,7 +64,5 @@ h1 {
     height: 539px;
     padding: 4px;
     background-color: #009AE4;
-    
-    
 }
 

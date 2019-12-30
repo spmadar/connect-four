@@ -19,7 +19,7 @@ for (let col = 0; col < board.length; col++) {
     column.classList.add("column");
     for (let row = 0; row < board[col].length; row++) {
         let cell = document.createElement("div");
-        cell.classList.add("empty","cell");
+        cell.classList.add("cellempty","cell");
         cell.addEventListener("click", moveChip);
         column.appendChild(cell);
     }
@@ -35,12 +35,17 @@ function moveChip(event) {
     // use col to index into 'board'
     column = board[col];
     let color = "Y";
+    let className = "cellyellow";
     if (isRedsTurn) {
         color = "R";
+        className = "cellred";
     }
     for (let i=0; i < column.length; i++) {
         if (column[i] == "E") {
             column[i] = color;
+            console.log(parent);
+            cellDiv = parent.item(i);
+            cellDiv.className = className;
             break;
         }
     }
@@ -48,7 +53,7 @@ function moveChip(event) {
     console.log(board);
 }
 
-function printBoard () {
+function renderBoard () {
     for (let col = 0; col < board.length; col++) {
         for (let row = 0; row < board[col].length; row++) {
             

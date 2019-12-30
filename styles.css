@@ -9,6 +9,18 @@ html, body
     overflow-x: hidden; 
 }
 
+.cellempty, .cell {
+    background-color: blue;
+}
+
+.cellred {
+    background-color:red;
+}
+
+.cellyellow {
+    background-color: yellow;
+}
+
 #connectBoard {
     height: 100%;
     display: flex;

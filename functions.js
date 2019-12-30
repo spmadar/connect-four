@@ -43,20 +43,47 @@ function moveChip(event) {
     for (let i=0; i < column.length; i++) {
         if (column[i] == "E") {
             column[i] = color;
-            console.log(parent);
-            cellDiv = parent.item(i);
+            cellDiv = parent.childNodes.item((column.length-1)-i);
             cellDiv.className = className;
             break;
         }
     }
     isRedsTurn = !isRedsTurn;
-    console.log(board);
+    checkWin();
 }
 
-function renderBoard () {
-    for (let col = 0; col < board.length; col++) {
-        for (let row = 0; row < board[col].length; row++) {
-            
-        }
+function checkWin() {
+    if (checkRowWin()){
+        alert("You win!")
     }
 }
+
+
+function checkArrWin(arr) {
+    // arr is an array of "E", "R", "Y"
+    for (let i=0; i <= arr.length-4; i++) {
+        if (arr[i] !== "E" &&
+            arr[i] == arr[i+1] && 
+            arr[i+1] == arr[i+2] &&
+            arr[i+2] == arr[i+3] 
+            )
+        return true;
+    }
+    return false;
+}
+
+function checkRowWin() {
+    const numRows = board.length;
+    const colHeight = board[0].length;
+    for (let c=0; c < colHeight; c++) {
+        let rowArray = [];
+        for (let r=0; r < numRows; r++) {
+            rowArray.push(board[r][c])
+        }
+        if (checkArrWin(rowArray)) {
+            return true;
+        }
+    }
+    return false;
+}
+

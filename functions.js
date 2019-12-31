@@ -1,5 +1,6 @@
 const c4Board = document.getElementById("connectBoard");
 var isRedsTurn = true;
+var gameOver = false;
 
 // represets connect 4 board as a list of columns 
 // forms a 2D array 7x6 (rotate ccw)
@@ -27,10 +28,12 @@ for (let col = 0; col < board.length; col++) {
 }
 
 function moveChip(event) {
+    if (gameOver) {
+        return;
+    }
     let cell = event.target;
     let parent = cell.parentElement;
     let col = Number(parent.id)
-    console.log("got event: " + col);
 
     // use col to index into 'board'
     column = board[col];
@@ -48,14 +51,25 @@ function moveChip(event) {
             break;
         }
     }
-    isRedsTurn = !isRedsTurn;
     checkWin();
 }
 
+
 function checkWin() {
-    if (checkRowWin()){
-        alert("You win!")
+    let winString = "Yellow"
+    if (isRedsTurn) {
+        winString = "Red"
     }
+    if (checkRowWin() || checkColWin()) {
+        alert(winString + " wins!");
+        gameOver = true;
+    }
+    else {
+        checkTie();
+    }
+    // turn flipper
+    isRedsTurn = !isRedsTurn;
+    return false;
 }
 
 
@@ -87,3 +101,24 @@ function checkRowWin() {
     return false;
 }
 
+function checkColWin() {
+    for (let c=0; c < board.length; c++) {
+        if (checkArrWin(board[c])) {
+            return true;
+        }
+    }
+    return false;
+}
+
+function checkTie() {
+    for (let r=0; r < board.length; r++) {
+        for (let c=0; c < board[0].length; c++) {
+            if (board[r][c] == "E") {
+                return false;
+            }
+        }
+    }
+    alert("It's a tie.");
+    gameOver = true;
+    return true;
+}

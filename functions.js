@@ -14,6 +14,7 @@ const board = [
     ["E","E","E","E","E","E"],
 ];
 
+// initialize board into DOM
 for (let col = 0; col < board.length; col++) {
     let column = document.createElement("div");
     column.id = col.toString(); 
@@ -25,6 +26,13 @@ for (let col = 0; col < board.length; col++) {
         column.appendChild(cell);
     }
     c4Board.appendChild(column);
+}
+// install reset button click handler here
+document.getElementById("newGameButton").addEventListener("click", resetButton);
+
+// ***Page Init Is Done At This Point***
+function resetButton() {
+    location.reload();
 }
 
 function moveChip(event) {
@@ -62,6 +70,7 @@ function checkWin() {
     }
     if (checkRowWin() || checkColWin() || checkDiagUpRight() || checkDiagDownRight()) {
         document.getElementById('winnerColor').innerHTML = winString;
+        document.getElementById('winnerColor').style.color = winString;
         document.getElementById('winnerWins').innerHTML = " wins!";
         gameOver = true;
     }

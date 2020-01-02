@@ -29,6 +29,20 @@ html, body
 .button:hover {
     background-color: #4CAF50; /* Green */
     color: white;
+    cursor: pointer;
+}
+
+#winnerColor {
+    text-shadow: -1px 1px 4px black;
+
+}
+
+.winMessage {
+    left: 30%;
+    top: 5%;
+    font-family: Nunito, sans-serif;
+    font-size: 40px;
+    position: absolute;
 }
 
 .cellempty, .cell {
@@ -56,7 +70,7 @@ html, body
 }
 
 #connectBoard {
-    height: 100%;
+    height: 500px;
     display: flex;
     position: absolute;
     right: 25%;

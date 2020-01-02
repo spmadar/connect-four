@@ -1,6 +1,7 @@
 const c4Board = document.getElementById("connectBoard");
 const headerText = document.getElementById('headerText');
 const moveSound = new Audio("sounds/woodblock1.mp3");
+const winSound = new Audio("sounds/victorysound.mp3");
 var isRedsTurn = true;
 var gameOver = false;
 
@@ -86,6 +87,7 @@ function checkWin() {
         headerText.innerHTML ="It's a tie!";
         gameOver = true;
     }
+    moveSound.play();
 }
 
 

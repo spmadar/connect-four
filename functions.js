@@ -1,4 +1,5 @@
 const c4Board = document.getElementById("connectBoard");
+const headerText = document.getElementById('headerText');
 var isRedsTurn = true;
 var gameOver = false;
 
@@ -30,6 +31,7 @@ for (let col = 0; col < board.length; col++) {
 // install reset button click handler here
 document.getElementById("newGameButton").addEventListener("click", resetButton);
 
+headerText.innerHTML = "Red's turn";
 // ***Page Init Is Done At This Point***
 function resetButton() {
     location.reload();
@@ -60,26 +62,28 @@ function moveChip(event) {
         }
     }
     checkWin();
+    if (!gameOver) {
+        // turn flipper
+        isRedsTurn = !isRedsTurn;
+        let turnString = (isRedsTurn) ? "Red" : "Yellow";
+        headerText.innerHTML = turnString + "'s turn"
+    }
 }
 
 
 function checkWin() {
-    let winString = "Yellow"
-    if (isRedsTurn) {
-        winString = "Red"
-    }
+    // ternary (3) expression
+    let turnString = (isRedsTurn) ? "Red" : "Yellow";
     if (checkRowWin() || checkColWin() || checkDiagUpRight() || checkDiagDownRight()) {
-        document.getElementById('winnerColor').innerHTML = winString;
-        document.getElementById('winnerColor').style.color = winString;
+        headerText.innerHTML = turnString;
+        headerText.style.color = turnString;
         document.getElementById('winnerWins').innerHTML = " wins!";
         gameOver = true;
     }
     else if (checkTie()) {
-        document.getElementById('winMessage').innerHTML ="It's a tie!";
+        headerText.innerHTML ="It's a tie!";
         gameOver = true;
     }
-    // turn flipper
-    isRedsTurn = !isRedsTurn;
 }
 
 
@@ -133,7 +137,7 @@ function checkTie() {
 
 function checkDiagUpRight() {
     for (let r=0; r <= board.length - 4; r++) {
-        for (let c=0; c < board[0].length - 4; c++) {
+        for (let c=0; c <= board[0].length - 4; c++) {
             console.log(r + "," + c)
             if (board[r][c] !== "E" &&
             board[r][c] == board[r+1][c+1] && 

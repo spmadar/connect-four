@@ -132,8 +132,9 @@ function checkTie() {
 }
 
 function checkDiagUpRight() {
-    for (let r=0; r < board.length - 4; r++) {
+    for (let r=0; r <= board.length - 4; r++) {
         for (let c=0; c < board[0].length - 4; c++) {
+            console.log(r + "," + c)
             if (board[r][c] !== "E" &&
             board[r][c] == board[r+1][c+1] && 
             board[r+1][c+1] == board[r+2][c+2] &&

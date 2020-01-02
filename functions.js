@@ -82,6 +82,7 @@ function checkWin() {
         headerText.style.color = turnString;
         document.getElementById('winnerWins').innerHTML = " wins!";
         gameOver = true;
+        winSound.play();
     }
     else if (checkTie()) {
         headerText.innerHTML ="It's a tie!";

@@ -60,16 +60,17 @@ function checkWin() {
     if (isRedsTurn) {
         winString = "Red"
     }
-    if (checkRowWin() || checkColWin()) {
-        alert(winString + " wins!");
+    if (checkRowWin() || checkColWin() || checkDiagUpRight() || checkDiagDownRight()) {
+        document.getElementById('winnerColor').innerHTML = winString;
+        document.getElementById('winnerWins').innerHTML = " wins!";
         gameOver = true;
     }
-    else {
-        checkTie();
+    else if (checkTie()) {
+        document.getElementById('winMessage').innerHTML ="It's a tie!";
+        gameOver = true;
     }
     // turn flipper
     isRedsTurn = !isRedsTurn;
-    return false;
 }
 
 
@@ -118,7 +119,35 @@ function checkTie() {
             }
         }
     }
-    alert("It's a tie.");
-    gameOver = true;
     return true;
+}
+
+function checkDiagUpRight() {
+    for (let r=0; r < board.length - 4; r++) {
+        for (let c=0; c < board[0].length - 4; c++) {
+            if (board[r][c] !== "E" &&
+            board[r][c] == board[r+1][c+1] && 
+            board[r+1][c+1] == board[r+2][c+2] &&
+            board[r+2][c+2] == board[r+3][c+3]
+            ) {
+                return true;
+            }
+         }
+    }
+    return false;
+}
+
+function checkDiagDownRight() {
+    for (let r = 0; r <= board.length - 4; r++) {
+        for (let c = 3; c <= board[0].length; c++) {
+            if (board[r][c] !== "E" &&
+            board[r][c] == board[r+1][c-1] && 
+            board[r+1][c-1] == board[r+2][c-2] &&
+            board[r+2][c-2] == board[r+3][c-3]
+            ) {
+                return true;
+            }
+         }
+    }
+    return false;
 }
